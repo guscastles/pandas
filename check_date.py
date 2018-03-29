@@ -1,6 +1,6 @@
 from functools import partial
 import pandas as pd
-from datetime import datetime as dt
+from datetime import datetime as dt, timedelta
 
 
 def immutable(func):
@@ -30,7 +30,8 @@ def read_data_from_csv(csv_file):
 
 def sum_from_the_date(data, date):
     'Sums up the total credit after a given date'
-    return data.loc[data['Date'] >= date, 'Credit'].sum() 
+    next_month = date.replace(month=date.month + 1) if date.month < 12 else dt(date.year + 1, 1, 1)
+    return data.loc[(data['Date'] >= date) & (data['Date'] < next_month), 'Credit'].sum() 
 
 
 def main(csv_file, date):
