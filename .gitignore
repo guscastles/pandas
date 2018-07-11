@@ -1,2 +1,6 @@
 __pycache__/
 *.swp
+.idea/
+Pipfile.lock
+.project
+.pytest_cache/
